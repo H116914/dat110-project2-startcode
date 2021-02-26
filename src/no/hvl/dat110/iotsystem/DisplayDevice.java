@@ -13,6 +13,29 @@ public class DisplayDevice {
 		
 		System.out.println("Display starting ...");
 		
+		String user = "Display";
+		String server = Common.BROKERHOST;
+		int port = Common.BROKERPORT;
+		
+		Client dispDev = new Client(user, server, port);
+		dispDev.connect();
+		System.out.println("1 DisplayDevice");
+		dispDev.createTopic("Temp");
+		System.out.println("2 DisplayDevice");
+		dispDev.subscribe("Temp");
+		System.out.println("3 DisplayDevice");
+		
+		for(int i=0; i<COUNT; i++) {
+			System.out.println("inne i for DisplayDevice");
+			Message m = dispDev.receive();
+			System.out.println("inne i for etter DisplayDevice");
+		}
+		System.out.println("4 DisplayDevice");
+		dispDev.unsubscribe("Temp");
+		System.out.println("5 DisplayDevice");
+		dispDev.disconnect();
+		
+		
 		// TODO - START
 				
 		// create a client object and use it to
@@ -28,7 +51,7 @@ public class DisplayDevice {
 		
 		System.out.println("Display stopping ... ");
 		
-		throw new UnsupportedOperationException(TODO.method());
+//		throw new UnsupportedOperationException(TODO.method());
 		
 	}
 }
